@@ -12,10 +12,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         roll_button.setOnClickListener {
-            result_textview.text = rollDiceStandar().toString()
+            rollDice()
         }
     }
 
-    private fun rollDice(): String = (1..6).shuffled().first().toString()
-    private fun rollDiceStandar() = Random().nextInt(6) + 1
+    private fun rollDice() {
+        val diceValue = generateDiceValue()
+        val drawableResource = when (diceValue) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        dice_image.setImageResource(drawableResource)
+    }
+
+    private fun generateDiceValue() = Random().nextInt(6) + 1
 }
